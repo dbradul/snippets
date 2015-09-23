@@ -95,12 +95,17 @@ static inline void print_stacktrace(FILE *out = stderr, unsigned int max_frames 
 
 
 
+////////////////////////////////////////////////////////////////////////
+QJsonDocument doc = QJsonDocument::fromJson(prop.toUtf8());
+QJsonObject obj = doc.object();
+int callID = obj["callID"].toInt(-1);
+qDebug() << "callID: "  << callID;
+////////////////////////////////////////////////////////////////////////
 
 
 
 
-
-
+////////////////////////////////////////////////////////////////////////
 #define PRINT_CALLSTACK \
     do \
     { \
@@ -112,6 +117,7 @@ static inline void print_stacktrace(FILE *out = stderr, unsigned int max_frames 
             printf("%d:  %s\n", i, str[i]); \
         } \
     } while(0) \
+////////////////////////////////////////////////////////////////////////
 
 
 
