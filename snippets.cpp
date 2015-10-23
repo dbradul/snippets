@@ -120,4 +120,89 @@ qDebug() << "callID: "  << callID;
 ////////////////////////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////////////////////////
+// possible implementation for QJsonValue::fromVariant
+////////////////////////////////////////////////////////////////////////
+QJsonValue QJsonValue::fromVariant(const QVariant& value)
+{
+    QJsonValue retValue;
 
+    switch(value.type())
+    {
+        case QMetaType::QStringList:
+        {
+            QJsonArray result;
+
+            foreach(QString listItem, value.toStringList())
+            {
+                result.push_back(listItem);
+            }
+
+            retValue = QJsonValue(result);
+            break;
+        }
+
+        // recursevely unwrap nested lists
+        case QMetaType::QVariantList:
+        {
+            QJsonArray result;
+
+            foreach(QVariant listItem, value.toList())
+            {
+                result.push_back(QVariant2QJson(listItem));
+            }
+
+            retValue = QJsonValue(result);
+            break;
+        }
+
+        case QMetaType::QVariantHash:
+        {
+            QJsonObject result;
+            ////result.fromVariantHash(value.toHash());
+
+            QVariantHash::const_iterator it = value.toHash().constBegin();
+            for (; it != value.toHash().constEnd(); ++it)
+            {
+                result.insert(it.key(), QJsonValue::fromVariant(it.value()));
+            }
+
+            retValue = QJsonValue(result);
+            break;
+
+        }
+
+        case QMetaType::QVariantMap:
+        {
+            QJsonObject result;
+            result.fromVariantMap(value.toMap());
+
+            retValue = QJsonValue(result);
+            break;
+
+        }
+
+        case QMetaType::Int:
+        case QMetaType::UInt:
+        case QMetaType::Long:
+        case QMetaType::LongLong:
+        case QMetaType::ULongLong:
+        case QMetaType::Double:
+            retValue = QJsonValue(value.toDouble());
+            break;
+
+        case  QMetaType::Bool:
+            retValue = QJsonValue(value.toBool());
+            break;
+
+        case QMetaType::QString:
+            retValue = QJsonValue(value.toString());
+            break;
+
+        default:
+            LOG_ERROR("Unrecognized type: '%s'", value.typeName());
+            retValue = QJsonValue(value.toJsonValue());
+    }
+
+    return retValue;
+}
