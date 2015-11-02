@@ -206,3 +206,25 @@ QJsonValue QJsonValue::fromVariant(const QVariant& value)
 
     return retValue;
 }
+
+
+////////////////////////////////////////////////////////////////////////
+// serialize to/from JSON
+////////////////////////////////////////////////////////////////////////
+// serialize to JSON
+QJsonArray arr0;
+arr0.append(QJsonValue("xxx"));
+QJsonArray arr;
+arr.append(arr0);
+QJsonObject jsonObj;
+jsonObj.insert("args", arr);
+QJsonDocument doc(jsonObj);
+QString serializedDoc = doc.toJson(QJsonDocument::Compact);
+qDebug() << "serializedDoc: " << serializedDoc;
+
+// deserialize from JSON
+QJsonObject objMessage      = QJsonDocument::fromJson(serializedDoc.toUtf8()).object();
+QVariantList args           = objMessage["args"].toArray().toVariantList();
+
+qDebug() << "list.at(0).type: "     << args.at(0).type();
+qDebug() << "list.at(0).typeName: " << args.at(0).typeName();
