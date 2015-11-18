@@ -228,3 +228,16 @@ QVariantList args           = objMessage["args"].toArray().toVariantList();
 
 qDebug() << "list.at(0).type: "     << args.at(0).type();
 qDebug() << "list.at(0).typeName: " << args.at(0).typeName();
+
+
+////////////////////////////////////////////////////////////////////////
+// Qt calculate hash for image
+////////////////////////////////////////////////////////////////////////
+QImage image;
+QCryptographicHash hash(QCryptographicHash::Md5);
+for (int row = 0; row < image.height(); ++row)
+{
+    hash.addData(reinterpret_cast<const char*>(image.scanLine(row)), image.width() * 4);
+}
+QString actualHash = hash.result().toHex();
+
