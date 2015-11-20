@@ -106,6 +106,7 @@ qDebug() << "callID: "  << callID;
 
 
 ////////////////////////////////////////////////////////////////////////
+#include <execinfo.h>
 #define PRINT_CALLSTACK \
     do \
     { \
