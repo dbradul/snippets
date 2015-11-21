@@ -20,3 +20,12 @@ for(int i=0; i<ARRAY_LEN(cmds); i++)
     XRELOG_LOG("injecting command [%s]", cmd.toAscii().constData());
     XREGraphicsScene::GetInstance()->getRootApp()->GetConnection()->injectCommand(cmd);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// Dumping XRE-traffic
+////////////////////////////////////////////////////////////////////////////////////////////
+void CXREApplication::pushJSON(const char* data, size_t len)
+{
+    printf("CXREApplication::pushJSON(): command = ' '%s'\n", data);
+    ...
+}
