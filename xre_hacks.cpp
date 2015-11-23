@@ -19,7 +19,7 @@ QString cmds[] =
 
 for(int i=0; i<ARRAY_LEN(cmds); i++)
 {
-    QString cmd = cmds[i];
+    QString& cmd = cmds[i];
     XRELOG_LOG("injecting command [%s]", cmd.toAscii().constData());
     XREGraphicsScene::GetInstance()->getRootApp()->GetConnection()->injectCommand(cmd);
 }
