@@ -242,3 +242,17 @@ for (int row = 0; row < image.height(); ++row)
 }
 QString actualHash = hash.result().toHex();
 
+
+
+////////////////////////////////////////////////////////////////////////
+// Timestamp
+////////////////////////////////////////////////////////////////////////
+#include <sys/time.h>
+
+long long current_timestamp()
+{
+    struct timeval te;
+    gettimeofday(&te, NULL); // get current time
+    long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // caculate milliseconds
+    return milliseconds;
+}
