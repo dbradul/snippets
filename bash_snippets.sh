@@ -1,5 +1,7 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// Generate files
+//////////////////////////////////////////////////////////////////////////////////////////////////
 #!/bin/sh
-
 #set -x
 
 rm -rf /opt/test/*
@@ -25,3 +27,22 @@ echo count $count
 # monitor number of files
 while true; do find /opt/test3 -iname "*" -type f | wc -l; sleep 2; done
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// Remote compilation
+//////////////////////////////////////////////////////////////////////////////////////////////////
+#!/bin/bash
+set -x
+# copy to
+rsync -arvzhe ssh /opt/projects/<prj> <name>@<remote_ip>:<remote_path>
+
+# run
+ssh <name>@<remote_ip> '<remote_path>/1.0-r0/temp/run.do_compile'
+
+# copy from
+sudo scp -i ~/.ssh/<key> <name>@<remote_ip>:<remote_path>  <local_path>
+
+# start remotely
+echo "starting..."
+ssh root@<target_ip> '<target_path> -with -whatever -args'
+ssh root@<target_ip> 'killall <bin>'
