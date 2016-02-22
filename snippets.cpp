@@ -256,3 +256,36 @@ long long current_timestamp()
     long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // caculate milliseconds
     return milliseconds;
 }
+
+
+
+////////////////////////////////////////////////////////////////////////
+// config.h
+////////////////////////////////////////////////////////////////////////
+namespace {
+
+static bool webKitDebugEnabled()
+{
+    QByteArray loggingEnv = qgetenv("WEBKIT_DEBUG");
+    if (loggingEnv.isEmpty())
+        return false;
+    return true;
+}
+
+static bool WEBKIT_DEBUG = webKitDebugEnabled();
+
+#define TRC_GROUP "MyGroup"
+
+#define TRC_DEBUG_FUNC_ENTER(s, f,  args...)  do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: ENTER: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_DEBUG_FUNC_EXIT(s)                do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: EXIT", __PRETTY_FUNCTION__); printf ("\n"); } } while(0)
+#define TRC_DEBUG(s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_INFO( s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_WARN( s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_ERROR(s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_FATAL(s, f,  args...) do { if (WEBKIT_DEBUG_XXX) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+
+}
+
+[...]
+TRC_DEBUG_FUNC_ENTER(0U, "");
+TRC_DEBUG_FUNC_EXIT (0U);
