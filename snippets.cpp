@@ -287,3 +287,4 @@ static bool _DEBUG = _DebugEnabled();
 [...]
 TRC_DEBUG_FUNC_ENTER(0U, "");
 TRC_DEBUG_FUNC_EXIT (0U);
+TRC_INFO(0U, "New request is received: request='%s'", request.getHeaderStr().c_str());
