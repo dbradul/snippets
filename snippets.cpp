@@ -262,29 +262,27 @@ long long current_timestamp()
 ////////////////////////////////////////////////////////////////////////
 // config.h
 ////////////////////////////////////////////////////////////////////////
-namespace {
 
-static bool webKitDebugEnabled()
+static bool _DebugEnabled()
 {
-    QByteArray loggingEnv = qgetenv("WEBKIT_DEBUG");
+    QByteArray loggingEnv = qgetenv("__DEBUG");
     if (loggingEnv.isEmpty())
         return false;
     return true;
 }
 
-static bool WEBKIT_DEBUG = webKitDebugEnabled();
+static bool _DEBUG = _DebugEnabled();
 
 #define TRC_GROUP "MyGroup"
 
-#define TRC_DEBUG_FUNC_ENTER(s, f,  args...)  do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: ENTER: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
-#define TRC_DEBUG_FUNC_EXIT(s)                do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: EXIT", __PRETTY_FUNCTION__); printf ("\n"); } } while(0)
-#define TRC_DEBUG(s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
-#define TRC_INFO( s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
-#define TRC_WARN( s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
-#define TRC_ERROR(s, f,  args...) do { if (WEBKIT_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
-#define TRC_FATAL(s, f,  args...) do { if (WEBKIT_DEBUG_XXX) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_DEBUG_FUNC_ENTER(s, f,  args...)  do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: ENTER: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_DEBUG_FUNC_EXIT(s)                do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: EXIT", __PRETTY_FUNCTION__); printf ("\n"); } } while(0)
+#define TRC_DEBUG(s, f,  args...) do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_INFO( s, f,  args...) do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_WARN( s, f,  args...) do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_ERROR(s, f,  args...) do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
+#define TRC_FATAL(s, f,  args...) do { if (_DEBUG) { printf( TRC_GROUP "\t" ); printf( "%s: " f, __PRETTY_FUNCTION__, ##args); printf ("\n"); } } while(0)
 
-}
 
 [...]
 TRC_DEBUG_FUNC_ENTER(0U, "");
