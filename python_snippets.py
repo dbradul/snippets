@@ -1,5 +1,5 @@
 """
-Converts float to/from its raw binary represetation
+Converts float (32 bits) to/from its raw binary represetation according to IEEE754
 """
 import struct
 
