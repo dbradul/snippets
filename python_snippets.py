@@ -21,3 +21,30 @@ while (i <= 100):
     print(bin2float(float2bin(delta)))
     i += 1
     delta += 0.1
+
+    
+##############################################
+wave  = "~"
+boat = "\U0001F6A3"
+seagull = "\u033C"
+fish = "\U0001F41F"
+penguin = "\U0001F427"
+wale = "\U0001F40B"
+octopus = "\U0001F419"
+
+
+row = wave*10 + boat + wave*15 + "\n"
+fish_row = wave*4 + fish + wave*21 + "\n"
+wale_row = wave*10 + wale + wave*15 + "\n"
+penguin_row = wave*7 + penguin + wave*18 + "\n"
+octopus_row = wave*17 + octopus + wave*8 + "\n"
+
+sea = (row + fish_row + wale_row + penguin_row + octopus_row)
+print (sea)
+
+##############################################
+print("City\t\t\tPopulation")
+print("Odessa\t\t\t1 000 001")
+print("Kiev\t\t\t4 000 001")
+print("Lviv\t\t\t900 001")
+print("Dnepr\t\t\t1 000 002")
