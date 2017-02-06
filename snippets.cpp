@@ -288,3 +288,26 @@ static bool _DEBUG = _DebugEnabled();
 TRC_DEBUG_FUNC_ENTER(0U, "");
 TRC_DEBUG_FUNC_EXIT (0U);
 TRC_INFO(0U, "New request is received: request='%s'", request.getHeaderStr().c_str());
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Read key-value pairs
+struct Flag_name_value {
+    std::string name;
+    std::string value;
+};
+
+std::string input("ab=xy z,time a=1s");
+std::istringstream iss(input);
+
+std::vector<Flag_name_value> flags;
+
+std::string token;
+Flag_name_value flag;
+while (std::getline(iss, token, ',')) {
+    size_t pos   = token.find('=');
+    flag.name    = token.substr(0, pos);
+    flag.value   = token.substr(pos + 1);
+    flags.push_back(flag);
+}
+
