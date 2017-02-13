@@ -290,6 +290,25 @@ TRC_DEBUG_FUNC_EXIT (0U);
 TRC_INFO(0U, "New request is received: request='%s'", request.getHeaderStr().c_str());
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef NDEBUG
+  #include <cassert>
+  #define UL_ASSERT(condition)
+  {
+      if(!(condition))
+      {
+          std::cerr << "Assertion failed at " << __FILE__ << ":" << __LINE__;
+          std::cerr << " inside " << __FUNCTION__ << std::endl;
+          std::cerr << "Condition: " << #condition;
+          abort();
+      }
+  }
+#else
+  #define UL_ASSERT(condition) (condition)
+#endif
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read key-value pairs
 struct Flag_name_value {
