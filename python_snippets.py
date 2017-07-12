@@ -50,3 +50,15 @@ print("%s%s%s" % ("Odessa", delimiter, 1000001))
 print("%s%s%s" % ("Kiev",   delimiter, 4000001))
 print("%s%s%s" % ("Lviv",   delimiter, 900000))
 print("%s%s%s" % ("Dnepr",  delimiter, 1000002))
+
+
+# -----------------------------------------------------------------
+# Print unicode symbol
+print("Unicode of %s is %d" % ('a', ord('a')))
+print("Unicode of %s is %d" % ('b', ord('b')))
+
+print("Symbol with unicode %d is %s" % (97, chr(97)))
+print("Symbol with unicode %d is %s" % (98, chr(98)))
+
+print("Unicode of %s is %d" % ('\u26BD', ord('\u26BD')))
+print("Symbol with unicode %d is %s" % (9917, chr(9917)))
