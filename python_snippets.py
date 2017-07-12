@@ -55,10 +55,7 @@ print("%s%s%s" % ("Dnepr",  delimiter, 1000002))
 # -----------------------------------------------------------------
 # Print unicode symbol
 print("Unicode of %s is %d" % ('a', ord('a')))
-print("Unicode of %s is %d" % ('b', ord('b')))
-
 print("Symbol with unicode %d is %s" % (97, chr(97)))
-print("Symbol with unicode %d is %s" % (98, chr(98)))
 
 print("Unicode of %s is %d" % ('\u26BD', ord('\u26BD')))
-print("Symbol with unicode %d is %s" % (9917, chr(9917)))
+print("Symbol with unicode %d is %s" % (0x26BD, chr(0x26BD)))
