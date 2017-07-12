@@ -43,8 +43,10 @@ sea = (row + fish_row + wale_row + penguin_row + octopus_row)
 print (sea)
 
 ##############################################
-print("City\t\t\tPopulation")
-print("Odessa\t\t\t1 000 001")
-print("Kiev\t\t\t4 000 001")
-print("Lviv\t\t\t900 001")
-print("Dnepr\t\t\t1 000 002")
+delimiter = "    "
+print("%s%s%s" % ("City",   delimiter, "Population"))
+print("----------------------")
+print("%s%s%s" % ("Odessa", delimiter, 1000001))
+print("%s%s%s" % ("Kiev",   delimiter, 4000001))
+print("%s%s%s" % ("Lviv",   delimiter, 900000))
+print("%s%s%s" % ("Dnepr",  delimiter, 1000002))
