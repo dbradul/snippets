@@ -59,3 +59,6 @@ print("Symbol with unicode %d is %s" % (97, chr(97)))
 
 print("Unicode of %s is %d" % ('\u26BD', ord('\u26BD')))
 print("Symbol with unicode %d is %s" % (0x26BD, chr(0x26BD)))
+
+# listify
+print(list(line.strip() for line in open('<new-lines-delimited-file>').read().split('\n')))
