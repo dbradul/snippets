@@ -62,3 +62,9 @@ print("Symbol with unicode %d is %s" % (0x26BD, chr(0x26BD)))
 
 # listify
 print(list(line.strip() for line in open('<new-lines-delimited-file>').read().split('\n')))
+
+
+# -----------------------------------------------------------------
+def chopper(lst, chunk_size):
+    return [lst[x : x + chunk_size]
+            for x in range(0, len(lst), chunk_size)]
