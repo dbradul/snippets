@@ -34,12 +34,13 @@ octopus = "\U0001F419"
 
 
 row = wave*10 + boat + wave*15 + "\n"
+seagull_row = wave*7 + seagull + wave*18 + "\n\n\n"
 fish_row = wave*4 + fish + wave*21 + "\n"
 wale_row = wave*10 + wale + wave*15 + "\n"
 penguin_row = wave*7 + penguin + wave*18 + "\n"
 octopus_row = wave*17 + octopus + wave*8 + "\n"
 
-sea = (row + fish_row + wale_row + penguin_row + octopus_row)
+sea = (seagull_row + row + fish_row + wale_row + penguin_row + octopus_row)
 print (sea)
 
 ##############################################
