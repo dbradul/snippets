@@ -69,3 +69,12 @@ print(list(line.strip() for line in open('<new-lines-delimited-file>').read().sp
 def chopper(lst, chunk_size):
     return [lst[x : x + chunk_size]
             for x in range(0, len(lst), chunk_size)]
+
+# -----------------------------------------------------------------
+# to and from binary represenation
+s = 'Слава Україні!'
+
+bin_repr = ''.join(['{:08b}'.format(b) for b in s.encode()])
+s2 = bytes([int(bin_repr[x : x + 8], 2) for x in range(0, len(bin_repr), 8)]).decode()
+
+assert s == s2
