@@ -85,3 +85,26 @@ s2 = bytes([int(bin_repr[x : x + 8], 2) for x in range(0, len(bin_repr), 8)]).de
 assert s == s2
 
 
+##############################################
+import logging
+_logger = logging.getLogger(__name__)
+
+class StreamToLogger(object):
+   """
+   Fake file-like stream object that redirects writes to a logger instance.
+   """
+   def __init__(self, logger, log_level=logging.INFO):
+      self.logger = logger
+      self.log_level = log_level
+      self.linebuf = ''
+
+   def write(self, buf):
+      for line in buf.rstrip().splitlines():
+         self.logger.log(self.log_level, line.rstrip())
+
+   def flush(self, *args, **kwargs):
+      pass
+    
+_slogger = StreamToLogger(_logger, logging.INFO)
+sys.stdout = _slogger
+
