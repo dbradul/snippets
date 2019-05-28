@@ -108,3 +108,36 @@ class StreamToLogger(object):
 _slogger = StreamToLogger(_logger, logging.INFO)
 sys.stdout = _slogger
 
+
+
+# # -------------------------------------------------------------------------------------------------
+# def run_as_process(func, max_request_quota, restore_rate):
+#     """
+#     """
+#     @functools.wraps(func)
+#     def inner(self, *args, **kw):
+#
+#         # # job._cr = cr
+#
+#         # conn = sql_db.db_connect(cr.dbname)
+#         # cr = conn.cursor()
+#
+#         conn, pool = pooler.restart_pool(cr.dbname, update_module=True)
+#         self.pool = pool
+#         cr = conn.cursor()
+#
+#         # cr = pooler.get_db(cr.dbname).cursor()
+#         _job_obj = self.pool.get('external.job')
+#         job = _job_obj.browse(cr, uid, job.id)
+#
+#         result = func(self, *args, **kw)
+#
+#         cr.close()
+#         pooler.delete(cr.dbname)
+#
+#
+#         return result
+#
+#     return inner
+
+
