@@ -139,29 +139,6 @@ sys.stdout = _slogger
 #         return result
 #
 #     return inner
-
-
-####################################################################
-old_invoice = ''
-temp_lines = []
-prepared_lines = []
-for invoice_line in invoice_lines:
-    if invoice_line['Tracking Number'] != old_invoice:
-        if temp_lines:
-            prepared_lines.append(temp_lines)
-            temp_lines = []
-        old_invoice = invoice_line['Tracking Number']
-    temp_lines.append(invoice_line)
-
-# <-- VS -->
-prepared_lines = []
-for key, group in groupby(invoice_lines, lambda x: x['Tracking Number']):
-    tmp_lines = []
-    for line in group:
-        tmp_lines.append(line)
-    prepared_lines.append(tmp_lines)
-
-
     
     
 # ------------------------------------------------------------------------------------------------------------------
@@ -180,7 +157,7 @@ def _ftp_list_files(ftp_host, ftp_path, ftp_user, ftp_password):
     return result
 
 
-
+# ------------------------------------------------------------------------------------------------------------------
 # chained maps
 [ 
      functools.reduce(lambda y, z: z(y), maps, x)  
