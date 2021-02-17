@@ -161,3 +161,34 @@ for key, group in groupby(invoice_lines, lambda x: x['Tracking Number']):
         tmp_lines.append(line)
     prepared_lines.append(tmp_lines)
 
+
+    
+    
+# ------------------------------------------------------------------------------------------------------------------
+def _download_ftp_file(ftp_host, ftp_path, ftp_user, ftp_password, ftp_filename, local_filename):
+    with closing(ftplib.FTP(ftp_host, ftp_user, ftp_password)) as ftp:
+        ftp.cwd(ftp_path)
+        with open(local_filename, 'wb') as f:
+            ftp.retrbinary('RETR ' + ftp_filename, f.write)
+
+# ------------------------------------------------------------------------------------------------------------------
+def _ftp_list_files(ftp_host, ftp_path, ftp_user, ftp_password):
+    with closing(ftplib.FTP(ftp_host, ftp_user, ftp_password)) as ftp:
+        ftp.cwd(ftp_path)
+        result = ftp.nlst()
+
+    return result
+
+
+
+# chained maps
+[ 
+     functools.reduce(lambda y, z: z(y), maps, x)  
+     for x in lst 
+]
+
+# chained filters
+[
+    x for x in lst
+    if all(f(x) for f in filters)
+]
