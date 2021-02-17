@@ -22,45 +22,6 @@ while (i <= 100):
     i += 1
     delta += 0.1
 
-    
-##############################################
-wave  = "~"
-boat = "\U0001F6A3"
-seagull = "\u033C"
-fish = "\U0001F41F"
-penguin = "\U0001F427"
-wale = "\U0001F40B"
-octopus = "\U0001F419"
-
-
-row = wave*10 + boat + wave*15 + "\n"
-seagull_row = wave*7 + seagull + wave*18 + "\n\n\n"
-fish_row = wave*4 + fish + wave*21 + "\n"
-wale_row = wave*10 + wale + wave*15 + "\n"
-penguin_row = wave*7 + penguin + wave*18 + "\n"
-octopus_row = wave*17 + octopus + wave*8 + "\n"
-
-sea = (seagull_row + row + fish_row + wale_row + penguin_row + octopus_row)
-print (sea)
-
-##############################################
-delimiter = "    "
-print("%s%s%s" % ("City",   delimiter, "Population"))
-print("----------------------")
-print("%s%s%s" % ("Odessa", delimiter, 1000001))
-print("%s%s%s" % ("Kiev",   delimiter, 4000001))
-print("%s%s%s" % ("Lviv",   delimiter, 900000))
-print("%s%s%s" % ("Dnepr",  delimiter, 1000002))
-
-
-# -----------------------------------------------------------------
-# Print unicode symbol
-print("Unicode of %s is %d" % ('a', ord('a')))
-print("Symbol with unicode %d is %s" % (97, chr(97)))
-
-print("Unicode of %s is %d" % ('\u26BD', ord('\u26BD')))
-print("Symbol with unicode %d is %s" % (0x26BD, chr(0x26BD)))
-
 # listify
 print(list(line.strip() for line in open('<new-lines-delimited-file>').read().split('\n')))
 
@@ -108,38 +69,6 @@ class StreamToLogger(object):
 _slogger = StreamToLogger(_logger, logging.INFO)
 sys.stdout = _slogger
 
-
-
-# # -------------------------------------------------------------------------------------------------
-# def run_as_process(func, max_request_quota, restore_rate):
-#     """
-#     """
-#     @functools.wraps(func)
-#     def inner(self, *args, **kw):
-#
-#         # # job._cr = cr
-#
-#         # conn = sql_db.db_connect(cr.dbname)
-#         # cr = conn.cursor()
-#
-#         conn, pool = pooler.restart_pool(cr.dbname, update_module=True)
-#         self.pool = pool
-#         cr = conn.cursor()
-#
-#         # cr = pooler.get_db(cr.dbname).cursor()
-#         _job_obj = self.pool.get('external.job')
-#         job = _job_obj.browse(cr, uid, job.id)
-#
-#         result = func(self, *args, **kw)
-#
-#         cr.close()
-#         pooler.delete(cr.dbname)
-#
-#
-#         return result
-#
-#     return inner
-    
     
 # ------------------------------------------------------------------------------------------------------------------
 def _download_ftp_file(ftp_host, ftp_path, ftp_user, ftp_password, ftp_filename, local_filename):
