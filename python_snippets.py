@@ -22,9 +22,6 @@ while (i <= 100):
     i += 1
     delta += 0.1
 
-# listify
-print(list(line.strip() for line in open('<new-lines-delimited-file>').read().split('\n')))
-
 
 # -----------------------------------------------------------------
 def chopper(lst, chunk_size):
@@ -77,7 +74,7 @@ def _download_ftp_file(ftp_host, ftp_path, ftp_user, ftp_password, ftp_filename,
         with open(local_filename, 'wb') as f:
             ftp.retrbinary('RETR ' + ftp_filename, f.write)
 
-# ------------------------------------------------------------------------------------------------------------------
+#
 def _ftp_list_files(ftp_host, ftp_path, ftp_user, ftp_password):
     with closing(ftplib.FTP(ftp_host, ftp_user, ftp_password)) as ftp:
         ftp.cwd(ftp_path)
@@ -98,3 +95,9 @@ def _ftp_list_files(ftp_host, ftp_path, ftp_user, ftp_password):
     x for x in lst
     if all(f(x) for f in filters)
 ]
+
+# ------------------------------------------------------------------------------------------------------------------
+def camel_2_snake(name):
+    "Converts CamelCase to camel_case"
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
