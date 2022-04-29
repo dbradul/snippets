@@ -85,19 +85,44 @@ def _ftp_list_files(ftp_host, ftp_path, ftp_user, ftp_password):
 
 # ------------------------------------------------------------------------------------------------------------------
 # chained maps
-[ 
-     functools.reduce(lambda y, z: z(y), maps, x)  
-     for x in lst 
+maps = [
+    dict({i: chr(i) for i in range(64356)}).get,
+    lambda x: x.upper()
 ]
 
+res = [ 
+    functools.reduce(lambda y, z: z(y), maps, x)  
+    for x in [1059, 1082, 1088, 1072, 1111, 1085, 1072]
+] # УКРАЇНА
+
 # chained filters
-[
-    x for x in lst
-    if all(f(x) for f in filters)
+filters = [
+    lambda x: x % 4 == 0,
+    lambda x: (x % 100 != 0) or (x % 400 == 0),
+    lambda x: x > 1980
 ]
+res = [
+    x for x in range(64356)
+    if all(f(x) for f in filters)
+] # leaps since 1980
 
 # ------------------------------------------------------------------------------------------------------------------
 def camel_2_snake(name):
     "Converts CamelCase to camel_case"
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+# ------------------------------------------------------------------------------------------------------------------
+import csv
+
+to_csv = [
+    {'name': 'bob', 'age': 25, 'weight': 200},
+    {'name': 'jim', 'age': 31, 'weight': 180},
+]
+
+keys = to_csv[0].keys()
+
+with open('people.csv', 'w', newline='') as output_file:
+    dict_writer = csv.DictWriter(output_file, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(to_csv)
