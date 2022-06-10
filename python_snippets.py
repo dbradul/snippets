@@ -126,3 +126,45 @@ with open('people.csv', 'w', newline='') as output_file:
     dict_writer = csv.DictWriter(output_file, keys)
     dict_writer.writeheader()
     dict_writer.writerows(to_csv)
+    
+    
+# ---------------------------------
+def merge(x1, x2):
+
+    if isinstance(x1, dict) and isinstance(x2, dict):
+        res = x1.copy() 
+        for k, v in x2.items():
+            res[k] = merge(res[k], v) if k in res else v
+        return res  
+    
+    elif isinstance(x1, list) and isinstance(x2, list):
+        res = list(x1)
+        res.extend(x2)
+        return res
+    
+    elif x1 == x2:
+        return x1   
+    
+    else:
+        raise ValueError(f"Cannot merge '{x1!r}' and '{x2!r}'")
+        
+# ------------------------------------
+def unwind_value(d, prefix=''):
+    """Flatten hierarchy object into 1 level depth dictionary"""
+    prefix = '{}.'.format(prefix) if prefix else prefix
+    result = {}
+    for k, v in d.items():
+        k = camel_2_snake(k)
+        if k == 'resource_name':
+            continue
+        if type(v) == dict:
+            result.update(unwind_value(v, prefix='{}{}'.format(prefix, k)))
+        elif type(v) == list:
+            for idx, elem in enumerate(v):
+                if type(elem) == dict:
+                    result.update(unwind_value(elem, prefix=f'{prefix}{k}_{idx}'))
+                else:
+                    result[f'{prefix}{k}_{idx}'] = elem
+        else:
+            result['{}{}'.format(prefix, k)] = str(v)
+    return result
