@@ -132,7 +132,7 @@ with open('people.csv', 'w', newline='') as output_file:
     
     
 # read in 1 line
-res = list(csv.DictReader(io.StringIO(open.read('csv_filepath'))))
+res = list(csv.DictReader(io.StringIO(open('csv_filepath').read())))
     
 
 # ------------------------------------------------------------------------------------------------------------------
