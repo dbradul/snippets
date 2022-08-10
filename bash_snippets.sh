@@ -46,3 +46,6 @@ sudo scp -i ~/.ssh/<key> <name>@<remote_ip>:<remote_path>  <local_path>
 echo "starting..."
 ssh root@<target_ip> '<target_path> -with -whatever -args'
 ssh root@<target_ip> 'killall <bin>'
+
+# We need to go deeper
+watch -n 0.5 'docker exec -it kafka-postgres-1 su - postgres -c "psql -d scraper -c \"select sum(last_message_id) from producer_channel;\""'
