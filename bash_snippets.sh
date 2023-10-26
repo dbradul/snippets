@@ -49,3 +49,23 @@ ssh root@<target_ip> 'killall <bin>'
 
 # We need to go deeper
 watch -n 0.5 'docker exec -it kafka-postgres-1 su - postgres -c "psql -d scraper -c \"select sum(last_message_id) from producer_channel;\""'
+
+#################################################################################################
+# Unzip files is a folder
+#!/usr/bin/env bash
+
+# Folder with zip files
+ZIP_FOLDER="/home/user/Downloads/"
+DEST_FOLDER="/home/user/Downloads/unzipped/"
+
+# Iterate over all zip files in the folder that ends with aaa.zip
+for file in $ZIP_FOLDER/*.zip; do
+    # Print unzipping progress
+    echo "Unzipping $file..."
+
+    # Unzip the file
+    unzip -o "$file" -d "$DEST_FOLDER"
+
+    # Print the name of the file that was unzipped
+    echo "Finished $file"
+done
