@@ -177,3 +177,17 @@ def unwind_value(d, prefix=''):
         else:
             result['{}{}'.format(prefix, k)] = str(v)
     return result
+
+
+# Patch a file content on fly
+# 8< -----------------------------------------------
+new_file = file + "_newfile.txt"
+with open(file, 'r') as f1:
+    lines = f1.readlines()
+    with open(new_file, 'w') as f2:
+        for line in lines:
+            if '128242416123' in line and 'GENY "' in line:
+                line = line.replace('"GENY "";', '"GENY ";')
+            f2.write(line)
+    shutil.move(new_file, file)
+# 8< -----------------------------------------------
